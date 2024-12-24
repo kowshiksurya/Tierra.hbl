@@ -190,10 +190,12 @@
     <p>&copy; 2024 Tierra Automation</p>
   </footer>
 
-  <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbw7J-XwJ-CJYYWRAJCGCc0wcW_ov9XgicMx3sap4yF3_ppOnrgtNKgCdhAFJTOhK9WQMA/exec';
+  <!-- Polyfill for fetch -->
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.umd.js"></script>
 
-    // Fetch data initially and set an interval for auto-refresh
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzEuKZptZ-jpfqPI8Fs5PoGsmULzi5o5wXxwPQ3cu0zUXq4nxyW4QGTEunsBz9KGSOOkg/exec';
+
     async function fetchData() {
       try {
         const response = await fetch(API_URL);
@@ -206,7 +208,6 @@
       }
     }
 
-    // Call fetchData on page load
     document.addEventListener('DOMContentLoaded', () => {
       fetchData();
       setInterval(fetchData, 300000); // Refresh every 5 minutes
@@ -259,7 +260,6 @@
     }
 
     function highlightCell(cell, index) {
-      // Highlight columns 17 (1) to 52 (Cell Temperature)
       if (index >= 17 && index <= 52 && typeof cell === 'number' && cell < 1.5) {
         return 'highlight';
       }
